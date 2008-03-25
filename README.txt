@@ -13,7 +13,7 @@ The Google AJAX Translation WordPress plugin provides a quick, simple and light 
 
 Be sure to start here:
 
-<a href="http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-wordpress-plugin/">http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-wordpress-plugin</a>
+<a href="http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-wordpress-plugin/">google-ajax-translation-wordpress-plugin</a>
 
 In the current version(0.1) I only enabled comment translation by default. This is because Google Ajax Translate only allow 500 characters right now (March 2008). But the function was already implemented, please feel free to uncomment line 79 if you want to try it.
 
@@ -37,7 +37,7 @@ http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-word
 
 Have questions or suggestions for this? Perhaps it's already answered or being discussed in the blog:
 
-<a href="http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-wordpress-plugin/">http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-wordpress-plugin</a>
+<a href="http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-wordpress-plugin/">google-ajax-translation-wordpress-plugin</a>
 
 
 == What's Changed? ==
