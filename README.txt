@@ -5,7 +5,7 @@ Requires at least: 1.5
 Tested up to: 2.3.2
 Stable tag: 0.1
 
-Google AJAX Translation plugin enables Google AJAX Language API on your blog, so your blog readers can easily translate your blog comments into other languages.
+This plugin enables Google AJAX Language API on your blog, so your blog readers can easily translate your blog comments into other languages.
 
 == Description ==
 
@@ -44,3 +44,7 @@ http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-word
 
 - .1
 Initial Release
+
+== Screenshots ==
+
+1. "View this Comment in: " plus 14 languages will show on your blog comments
