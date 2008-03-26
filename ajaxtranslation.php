@@ -2,10 +2,10 @@
 /*
 Plugin Name: Google AJAX Translation
 Plugin URI: http://blog.libinpan.com
-Description: Add <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Translation</a> onto your blog. This plugin enables your blog readers translate your blog comments into other languages. In the current version(0.1) I only enabled comment translation by default. This is because Google Ajax Translate only allow 500 characters right now (March 2008). But the function was already implemented, please feel free to uncomment line 79 if you want to try it. 
+Description: Add <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Translation</a> onto your blog. This plugin enables your blog readers translate your blog comments into other languages. In the current version(0.1.*) I only enabled comment translation by default. This is because Google Ajax Translate only allow 500 characters right now (March 2008). But the function was already implemented, please feel free to uncomment line 84 if you want to try it. 
 Author: Libin Pan
-Version: 0.1
-Stable tag: 0.1
+Version: 0.1.1
+Stable tag: 0.1.1
 Author URI: http://libinpan.com
 
 Installation:
@@ -17,7 +17,7 @@ Installation:
 Notes:
   - Right now only support translating the first 500 characters of your blog comments
   - I am using Google Ajax Translation to detect your text languages. It may not be 100% right, but close.
-  - If you want to use it with your post too, please comment out line 79. But please notice all the html tag will be filtered out as google will translate the content inside of tags, which could mess your blog.
+  - If you want to use it with your post too, please comment out line 84. But please notice all the html tag will be filtered out as google will translate the content inside of tags, which could mess your blog.
 	- If you want to do some changes and want to share with all of us, please feel free to contact me @ libinpan@gmail.com or leave comments
 	
 TODO:
@@ -27,6 +27,11 @@ TODO:
   - Support more than 500 characters?
 
 Version history:
+- .1.1
+Small updates:
+. Working on Admin/Comments pages too
+. Fixed the comment format problem found by Sean
+
 - .1
 Initial Release
 */
