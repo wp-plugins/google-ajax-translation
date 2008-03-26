@@ -3,7 +3,7 @@ Tags: google, ajax, translate, translation, language
 Contributors: Libin Pan
 Requires at least: 1.5
 Tested up to: 2.3.2
-Stable tag: 0.1
+Stable tag: 0.1.1
 
 This plugin enables Google AJAX Language API on your blog, so your blog readers can easily translate your blog comments into other languages.
 
@@ -15,7 +15,7 @@ Be sure to start here:
 
 <a href="http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-wordpress-plugin/">google-ajax-translation-wordpress-plugin</a>
 
-In the current version(0.1) I only enabled comment translation by default. This is because Google Ajax Translate only allow 500 characters right now (March 2008). But the function was already implemented, please feel free to uncomment line 79 if you want to try it.
+In the current version(0.1.*) I only enabled comment translation by default. This is because Google Ajax Translate only allow 500 characters right now (March 2008). But the function was already implemented, please feel free to uncomment line 79 if you want to try it.
 
 
 == Installation ==
@@ -41,6 +41,11 @@ Have questions or suggestions for this? Perhaps it's already answered or being d
 
 
 == What's Changed? ==
+
+- .1.1
+Small updates:
+. Working on Admin/Comments pages too
+. Fixed the comment format problem found by Sean
 
 - .1
 Initial Release

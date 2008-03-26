@@ -67,7 +67,7 @@ function translate_post_link($content) {
   
 	$post_link = "<div id='translate_post_"
 	   .$id 
-	   ."'>"
+	   ."'><p></p>"
 	   .$content
 	   ."</div><hr/><p>View this Post in:"
      .language_links('post', $id)
@@ -84,7 +84,7 @@ function translate_comment_link($content) {
   
 	$comment_link = "<div id='translate_comment_"
 	   .$id 
-	   ."'>"
+	   ."'><p></p>"
 	   .$content
 	   ."</div><hr/><p>View this Comment in:"
      .language_links('comment', $id)
@@ -145,4 +145,5 @@ function google_translate_js() {
 }
 
 add_action('wp_footer', google_translate_js);
+add_action('admin_footer', google_translate_js);
 ?>
