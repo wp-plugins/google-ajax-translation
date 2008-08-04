@@ -189,7 +189,7 @@ function translate_post_link($content) {
     ."</span><hr /><p>View this Post in:".language_links('post', $id)."</p>";
 }
 
-add_action('the_content', 'translate_post_link');
+add_action('the_content', 'translate_post_link', 30);
 
 function translate_comment_link($content) {
   global $comment;
@@ -200,7 +200,7 @@ function translate_comment_link($content) {
      ."</span><hr/><p>View this Comment in:".language_links('comment', $id)."</p>";
 }
 
-add_action('comment_text', 'translate_comment_link');
+add_action('comment_text', 'translate_comment_link', 30);
 
 function google_translate_js() {
   echo <<<EOT
