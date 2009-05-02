@@ -1,0 +1,91 @@
+/* google-ajax-translation */
+
+.translate_block {
+display: -moz-inline-box; /* for FF 2 but FF 2 looks like it has other problems with columns anyway */
+display: inline-block;
+}
+
+.translate_block a {
+display: block;
+font-weight: normal !important;
+text-decoration: none !important;
+}
+
+.translate_loading {
+background: url(ajax-loader.gif) no-repeat; /* http://www.ajaxload.info/ */
+vertical-align: middle;
+}
+
+.translate_popup {
+background-color: #fff; /* Use your own background color here. */
+border-style: solid;
+border-width: 1px;
+-moz-column-count: 3;
+-moz-column-gap: 1em;
+/*-webkit-column-count: 3;
+-webkit-column-gap: 1em; webkit doesn't do columns right yet */
+padding: 0.5em;
+position: absolute;
+z-index: 50;
+}
+
+.translate_block .translate_flag {
+background: url(42flags.png) no-repeat;
+}
+
+.translate_popup .translate_flag {
+margin: 0 0 6px;
+}
+
+.translate_block .ar {background-position: 0 0;}
+.translate_block .bg {background-position: 0 -12px;}
+.translate_block .ca {background-position: 0 -24px;}
+.translate_block .cs {background-position: 0 -36px;}
+.translate_block .da {background-position: 0 -48px;}
+.translate_block .de {background-position: 0 -60px;}
+.translate_block .el {background-position: 0 -72px;}
+.translate_block .en {background-position: 0 -84px;}
+.translate_block .es {background-position: 0 -96px;}
+.translate_block .et {background-position: 0 -108px;}
+.translate_block .fi {background-position: 0 -120px;}
+.translate_block .fr {background-position: 0 -132px;}
+.translate_block .gl {background-position: 0 -144px;}
+.translate_block .he {background-position: 0 -156px;}
+.translate_block .hi {background-position: 0 -168px;}
+.translate_block .hr {background-position: 0 -180px;}
+.translate_block .hu {background-position: 0 -192px;}
+.translate_block .id {background-position: 0 -204px;}
+.translate_block .it {background-position: 0 -216px;}
+.translate_block .ja {background-position: 0 -228px;}
+.translate_block .ko {background-position: 0 -240px;}
+.translate_block .lt {background-position: 0 -252px;}
+.translate_block .lv {background-position: 0 -264px;}
+.translate_block .mt {background-position: 0 -276px;}
+.translate_block .nl {background-position: 0 -288px;}
+.translate_block .no {background-position: 0 -300px;}
+.translate_block .pl {background-position: 0 -312px;}
+.translate_block .pt {background-position: 0 -324px;}
+.translate_block .ro {background-position: 0 -336px;}
+.translate_block .ru {background-position: 0 -348px;}
+.translate_block .sk {background-position: 0 -360px;}
+.translate_block .sl {background-position: 0 -372px;}
+.translate_block .sq {background-position: 0 -384px;}
+.translate_block .sr {background-position: 0 -396px;}
+.translate_block .sv {background-position: 0 -408px;}
+.translate_block .th {background-position: 0 -420px;}
+.translate_block .tl {background-position: 0 -432px;}
+.translate_block .tr {background-position: 0 -444px;}
+.translate_block .uk {background-position: 0 -456px;}
+.translate_block .vi {background-position: 0 -468px;}
+.translate_block .zh-cn {background-position: 0 -480px;}
+.translate_block .zh-tw {background-position: 0 -492px;}
+
+.google_branding {
+font-size: 10px;
+}
+.google_branding img {
+border: 0;
+display: block;
+margin: 0;
+padding: 0;
+}
