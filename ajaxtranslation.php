@@ -4,8 +4,8 @@ Plugin Name: Google AJAX Translation
 Plugin URI: http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/
 Description: Add <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Translation</a> to your blog. This plugin allows your blog readers to translate your blog posts or comments into other languages. <a href="options-general.php?page=ajaxtranslation.php">[Settings]</a>
 Author: Libin Pan, Michael Klein, and Nick Marshall
-Version: 0.4.0
-Stable tag: 0.4.0
+Version: 0.4.1
+Stable tag: 0.4.1
 Author URI: http://libinpan.com/
 
 Installation:
@@ -38,7 +38,7 @@ if (!class_exists('GoogleTranslation')) {
 	class GoogleTranslation {
 
 		var $optionPrefix = 'google_translation_';
-		var $version      = '0.4.0';
+		var $version      = '0.4.1';
 		var $pluginUrl    = 'http://wordpress.org/extend/plugins/google-ajax-translation/';
 		var $authorUrl    = 'http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/';
 
@@ -221,7 +221,7 @@ if (!class_exists('GoogleTranslation')) {
 
 		var $options = array(  // default values for options
 			'linkStyle' => 'text',
-			'postEnable' => true,
+			'postEnable' => 'on',
 			'commentEnable' => false,
 			'languages' => array()
 		);
@@ -245,8 +245,10 @@ if (!class_exists('GoogleTranslation')) {
 		function GoogleTranslation() {                      // Constructor
 			$this->pluginRoot = $this->getPluginUrl();
 
-			foreach ($this->options as $k=>$v) {              // get options from DB
-				$this->options[$k] = get_option($this->optionPrefix.$k);
+			foreach ( $this -> options as $k => $v ) {              // get options from DB
+				$current_option = get_option( $this -> optionPrefix.$k );
+				if ( $current_option )
+					$this -> options[$k] = $current_option;
 			}
 
 			$browser_lg = $this -> browser_lang = $this -> preferred_language( $this -> target_languages ); // find browser's preferred language

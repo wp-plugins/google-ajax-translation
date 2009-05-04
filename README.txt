@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=l
 Tags: google, ajax, translate, translation, language
 Requires at least: 1.5
 Tested up to: 2.7.1
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 
 Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts or comments into up to 42 languages.
 
@@ -62,6 +62,9 @@ Have questions or suggestions for this? Perhaps it's already answered or being d
 
 
 == Version Notes ==
+0.4.1 (Nick Marshall)
+* Fixed php warning when plugin is first activated and default settings are ignored.
+
 0.4.0 (Nick Marshall)
 
 * Added an option to enable and disable comment translation.
