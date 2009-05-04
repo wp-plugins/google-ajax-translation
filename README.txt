@@ -63,6 +63,7 @@ Have questions or suggestions for this? Perhaps it's already answered or being d
 
 == Version Notes ==
 0.4.1 (Nick Marshall)
+
 * Fixed php warning when plugin is first activated and default settings are ignored.
 
 0.4.0 (Nick Marshall)
