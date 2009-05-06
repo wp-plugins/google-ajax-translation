@@ -81,7 +81,8 @@ margin: 0 0 6px;
 .translate_block .zh-tw {background-position: 0 -492px;}
 
 .google_branding {
-font-size: 10px;
+font-size: 11px;
+page-break-inside: avoid;
 }
 .google_branding img {
 border: 0;

@@ -2,9 +2,9 @@
 Contributors: Libin, alquanto, monodistortion
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=libin_pan%40hotmail%2ecom&amp;item_name=Google%20Ajax%20Translation%20WP%20Plugin&amp;item_number=Support%20Open%20Source&amp;no_shipping=0&amp;no_note=1&amp;tax=0&amp;currency_code=USD&amp;lc=US&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8
 Tags: google, ajax, translate, translation, language
-Requires at least: 1.5
+Requires at least: 2.7
 Tested up to: 2.7.1
-Stable tag: 0.4.1
+Stable tag: 0.4.2
 
 Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts or comments into up to 42 languages.
 
@@ -42,6 +42,7 @@ Related Links:
 * The included ajax throbber is black on a white background. You can make your own at <a href="http://www.ajaxload.info/">http://www.ajaxload.info/</a>. 16 by 16 pixels works best.
 * The "[" and "]" characters in the "Translate" button can be changed in the variables `$before_translate` and `$after_translate`
 * The `google-ajax-translation.js` file is included for reference. It is minified and appended to the file `jquery.translate-1.3.2.min.js`
+* To add WordPress MU compatibility the options page had to be changed to use the register_setting function. Because of this the plugin requires WordPress 2.7.
 
 Please see my blog online:
 
@@ -62,9 +63,17 @@ Have questions or suggestions for this? Perhaps it's already answered or being d
 
 
 == Version Notes ==
+
+0.4.2 (Nick Marshall)
+
+* Corrected the Swedish flag image (Thanks, Jørn Eichner)
+* Added option to enable and disable page translation
+* Fixed bug with loading default settings
+* Changed options page to use register_setting function. The plugin requires WordPress version 2.7+
+
 0.4.1 (Nick Marshall)
 
-* Fixed php warning when plugin is first activated and default settings are ignored.
+* Fixed php warning when plugin is first activated and default settings are ignored. (Thanks, Jørn Eichner)
 
 0.4.0 (Nick Marshall)
 
