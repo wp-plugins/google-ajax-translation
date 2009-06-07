@@ -5,6 +5,10 @@ display: -moz-inline-box; /* for FF 2 but FF 2 looks like it has other problems 
 display: inline-block;
 }
 
+.translate_block td {
+padding: 0 1em 0 0;
+}
+
 .translate_block a {
 display: block;
 font-weight: normal !important;
@@ -20,10 +24,6 @@ vertical-align: middle;
 background-color: #fff; /* Use your own background color here. */
 border-style: solid;
 border-width: 1px;
--moz-column-count: 3;
--moz-column-gap: 1em;
-/*-webkit-column-count: 3;
--webkit-column-gap: 1em; webkit doesn't do columns right yet */
 padding: 0.5em;
 position: absolute;
 z-index: 50;
@@ -31,10 +31,6 @@ z-index: 50;
 
 .translate_block .translate_flag {
 background: url(42flags.png) no-repeat;
-}
-
-.translate_popup .translate_flag {
-margin: 0 0 6px;
 }
 
 .translate_block .ar {background-position: 0 0;}

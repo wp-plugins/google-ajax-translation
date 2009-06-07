@@ -1,6 +1,6 @@
 /**
  * Google AJAX Translation
- * 2008-04-28
+ * 2008-06-06
  */
 function google_translate( lang, type, id ) {
 	var text_node = document.getElementById( ( ( 'comment' == type ) ? 'div-' : '' ) + type + '-' + id );
@@ -37,7 +37,7 @@ function show_translate_popup( lang, type, id ) {
 var localized_languages = []; // array that holds localized language names for the entire page
 
 function localize_languages( lang, popup_id ) {
-	var language_nodes = jQuery( popup_id ).children( 'a[title]' ).get();
+	var language_nodes = jQuery( 'a[title]', popup_id ).get();
 	if ( 0 == localized_languages.length ) { // Have language names not been translated yet? This should only be done once per page
 		for ( i in language_nodes ) {
 			localized_languages[i] = language_nodes[i].title; // Make array of English language names
