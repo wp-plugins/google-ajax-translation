@@ -3,16 +3,16 @@ Contributors: Libin, alquanto, monodistortion
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=libin_pan%40hotmail%2ecom&amp;item_name=Google%20Ajax%20Translation%20WP%20Plugin&amp;item_number=Support%20Open%20Source&amp;no_shipping=0&amp;no_note=1&amp;tax=0&amp;currency_code=USD&amp;lc=US&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8
 Tags: google, ajax, translate, translation, language
 Requires at least: 2.7
-Tested up to: 2.7.1
-Stable tag: 0.4.3
+Tested up to: 2.8
+Stable tag: 0.4.4
 
-Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts or comments into up to 42 languages.
+Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts or comments into up to 43 languages.
 
 == Description ==
 
 The Google AJAX Translation WordPress plugin provides a quick, simple, and light way to add translation to your blog.
 
-A "Translate" button is added to the bottom of posts, pages, and/or comments. When the button is clicked a popup window opens showing a list of available languages. You can choose which of the 42 languages to display in the Administration Panel. The list of languages can be shown as text (in the native language of each language), as flag icons, or as both. Flag icons can be confusing and sometimes misleading so I recommend the text option. (See this <a href="http://www.google.com/search?q=language+flags">google search for language flags.</a>)
+A "Translate" button is added to the bottom of posts, pages, and/or comments. When the button is clicked a popup window opens showing a list of available languages. You can choose which of the 43 languages to display in the Administration Panel. The list of languages can be shown as text (in the native language of each language), as flag icons, or as both. Flag icons can be confusing and sometimes misleading so I recommend the text option. (See this <a href="http://www.google.com/search?q=language+flags">google search for language flags.</a>)
 
 Most formatting, font, color, etc. changes can be made in the file `google-ajax-translation.css` or you can override them with your own CSS file.
 
@@ -61,7 +61,11 @@ http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/
 Have questions or suggestions for this? Please ask in the forums here.
 
 
-== Version Notes ==
+== Changelog ==
+
+0.4.4 (Nick Marshall)
+
+* The Google language API added <a href="http://googleblog.blogspot.com/2009/06/google-translates-persian.html">alpha support</a> for Persian (Farsi) so Persian was added.
 
 0.4.3 (Nick Marshall)
 
@@ -102,7 +106,6 @@ Have questions or suggestions for this? Please ask in the forums here.
 * All the flag icons are assembled into one PNG file and displayed as CSS background images sprites, which reduces the number of HTTP requests.
 * Added an AJAX loading throbber image. Make your own at <a href="http://www.ajaxload.info/">http://www.ajaxload.info/</a>.
 * JavaScript has been minified and moved to the end of `jquery.translate-1.3.2.min.js`. The non-minified source code is `google-ajax-translation.js`
-
 
 
 0.3.1

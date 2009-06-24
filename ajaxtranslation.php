@@ -4,8 +4,8 @@ Plugin Name: Google AJAX Translation
 Plugin URI: http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/
 Description: Add <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Translation</a> to your blog. This plugin allows your blog readers to translate your blog posts or comments into other languages. <a href="options-general.php?page=ajaxtranslation.php">[Settings]</a>
 Author: Libin Pan, Michael Klein, and Nick Marshall
-Version: 0.4.3
-Stable tag: 0.4.3
+Version: 0.4.4
+Stable tag: 0.4.4
 Author URI: http://libinpan.com/
 
 Installation:
@@ -36,7 +36,7 @@ if (!class_exists('GoogleTranslation')) {
 	class GoogleTranslation {
 
 		var $optionPrefix = 'google_translation_';
-		var $version      = '0.4.3';
+		var $version      = '0.4.4';
 		var $pluginUrl    = 'http://wordpress.org/extend/plugins/google-ajax-translation/';
 		var $authorUrl    = 'http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/';
 
@@ -51,6 +51,7 @@ if (!class_exists('GoogleTranslation')) {
 			'en' => 'English',
 			'es' => 'Spanish',
 			'et' => 'Estonian',
+			'fa' => 'Persian',
 			'fi' => 'Finnish',
 			'fr' => 'French',
 			'gl' => 'Galician',
@@ -95,6 +96,7 @@ if (!class_exists('GoogleTranslation')) {
 			'en',     // English
 			'es',     // Spanish
 			'et',     // Estonian
+			'fa',     // Persian
 			'fi',     // Finnish
 			'fr',     // French
 			'gl',     // Galician
@@ -139,6 +141,7 @@ if (!class_exists('GoogleTranslation')) {
 			'en' => 'English',
 			'es' => 'español',
 			'et' => 'eesti',
+			'fa' => 'فارسی',
 			'fi' => 'suomi',
 			'fr' => 'français',
 			'gl' => 'galego',
@@ -183,6 +186,7 @@ if (!class_exists('GoogleTranslation')) {
 			'en' => 'Translate',
 			'es' => 'Traductor',
 			'et' => 'Tõlkima',
+			'fa' => 'ترجمه',
 			'fi' => 'Kääntäjä',
 			'fr' => 'Traduction',
 			'gl' => 'Traducir',
@@ -264,7 +268,7 @@ if (!class_exists('GoogleTranslation')) {
 			}
 
 			// Add action and filter hooks to WordPress
-			wp_enqueue_style( 'google-ajax-translation', $this->pluginRoot . 'google-ajax-translation.css' , false, '20090525', 'screen' );
+			wp_enqueue_style( 'google-ajax-translation', $this->pluginRoot . 'google-ajax-translation.css' , false, '20090623', 'screen' );
 			if ( is_admin() ){
 				add_action( 'admin_menu', array( &$this, 'addOptionsPage' ) );
 				add_action( 'admin_init', array( &$this, 'register_mysettings' ) );
@@ -383,7 +387,7 @@ if (!class_exists('GoogleTranslation')) {
 						echo '<label title="' . $this -> display_name[$lg] . '"><input type="checkbox" name="' . $p . 'languages[]" value="' . $lg . '" ';
 						if ( in_array( $lg, (array) $this -> options['languages'] ) ) echo 'checked="checked"';
 						echo ' /> <img class="translate_flag ' . $lg . '" src="' . $this -> pluginRoot . 'transparent.gif" alt="' . $this -> display_name[$lg] . '" width="16" height="11" /> ' . $v . '</label><br />';
-						if ( ( 0 == ++$i % 14) && ( $i < $numberof_languages ) ) {
+						if ( ( 0 == ++$i % 15) && ( $i < $numberof_languages ) ) {
 							echo '</td>
 							<td style="padding: 0 10px 0 0;" valign="top">';
 						}
