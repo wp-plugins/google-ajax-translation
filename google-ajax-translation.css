@@ -1,7 +1,7 @@
 /* google-ajax-translation */
 
 .translate_block {
-display: -moz-inline-box; /* for FF 2 but FF 2 looks like it has other problems with columns anyway */
+display: -moz-inline-box; /* for FF 2 but FF 2 looks like it has other problems anyway */
 display: inline-block;
 }
 
@@ -12,6 +12,7 @@ padding: 0 1em 0 0;
 .translate_block a {
 display: block;
 font-weight: normal !important;
+line-height: 1.5;
 text-decoration: none !important;
 }
 
