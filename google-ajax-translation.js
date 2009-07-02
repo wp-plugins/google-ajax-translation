@@ -1,14 +1,16 @@
 /**
  * Google AJAX Translation
- * 2008-06-06
+ * 2008-06-26
  */
 function google_translate( lang, type, id ) {
-	var text_node = document.getElementById( ( ( 'comment' == type ) ? 'div-' : '' ) + type + '-' + id );
+	var text_node = document.getElementById( ( ( 'comment' == type ) ? 'div-' : '' ) + type + '-' + id ),
+		loading_id;
 	if ( ! text_node && 'comment' == type ) // some themes do not have the div-comment-id divs
 		text_node = document.getElementById( 'comment-' + id );
 	if ( text_node ) {
-		var loading_id = '#translate_loading_' + type + '_' + id;
-		lang = ('he' == lang) ? 'iw' : lang; // Google translate uses the wrong code for Hebrew
+		loading_id = '#translate_loading_' + type + '_' + id;
+		if ( 'he' == lang ) // Google translate uses the wrong code for Hebrew
+			lang = 'iw';
 		jQuery( text_node ).translate( lang, {
 			fromOriginal: true,
 			not: '.translate_block',
@@ -34,18 +36,20 @@ function show_translate_popup( lang, type, id ) {
 	}
 }
 
-var localized_languages = []; // array that holds localized language names for the entire page
+var llangs = []; // array that holds localized language names for the entire page
 
 function localize_languages( lang, popup_id ) {
-	var language_nodes = jQuery( 'a[title]', popup_id ).get();
-	if ( 0 == localized_languages.length ) { // Have language names not been translated yet? This should only be done once per page
+	var language_nodes = jQuery( 'a[title]', popup_id ).get(),
+		i;
+	if ( 0 == llangs.length ) { // Have language names not been translated yet? This should only be done once per page
 		for ( i in language_nodes ) {
-			localized_languages[i] = language_nodes[i].title; // Make array of English language names
+			llangs[i] = language_nodes[i].title; // Make array of English language names
 		}
-		lang = ('he' == lang) ? 'iw' : lang; // Google translate uses the wrong code for Hebrew
-		jQuery.translate( localized_languages, 'en', lang, {
+		if ( 'he' == lang ) // Google translate uses the wrong code for Hebrew
+			lang = 'iw';
+		jQuery.translate( llangs, 'en', lang, {
 				complete: function() {
-					localized_languages = this.translation;
+					llangs = this.translation;
 					insert_languagetitles( popup_id, language_nodes );
 				}
 			});
@@ -55,9 +59,9 @@ function localize_languages( lang, popup_id ) {
 }
 
 function insert_languagetitles( popup_id, language_nodes ) { // copy localized language names into titles
-	for ( i in language_nodes ) {
+	for ( var i in language_nodes ) {
 		if ( language_nodes[i].title ) {
-			language_nodes[i].title = localized_languages[i];
+			language_nodes[i].title = llangs[i];
 		}
 	}
 	jQuery( popup_id ).addClass( 'localized' );
