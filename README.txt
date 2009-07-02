@@ -59,8 +59,9 @@ http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/
 Have questions or suggestions for this plugin? 
 
 Please ask in the forums here.
+
 1. Please start a new thread for your question, problem, or suggestion.
-2. Please include as much information as possible like: 
+2. Please include as much information as possible like:
    WordPress version, Google AJAX Translation version, a link to your web page
 3. Most problems seem to be theme related so check to see if the plugin works in the default theme (Kubrick).
 
