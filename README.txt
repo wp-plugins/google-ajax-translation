@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=l
 Tags: google, ajax, translate, translation, language
 Requires at least: 2.7
 Tested up to: 2.8
-Stable tag: 0.4.4
+Stable tag: 0.4.5
 
 Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts or comments into up to 43 languages.
 
@@ -40,14 +40,12 @@ Related Links:
 * Most formatting, font, color, etc. changes can be made in `google-ajax-translation.css` or you can override them with your own CSS file
 * The included ajax throbber is black on a white background. You can make your own at <a href="http://www.ajaxload.info/">http://www.ajaxload.info/</a>. 16 by 16 pixels works best.
 * The "[" and "]" characters in the "Translate" button can be changed in the variables `$before_translate` and `$after_translate`
-* The `google-ajax-translation.js` file is included for reference. It is minified and appended to the file `jquery.translate-1.3.7.min.js`
+* The `google-ajax-translation.js` file is included for reference. It is minified and appended to the file `jquery.translate-1.3.9.min.js`
 * To add WordPress MU compatibility the options page had to be changed to use the register_setting function. Because of this the plugin requires WordPress 2.7.
 * Deleting the plugin from the Administration Panel (Plugins > Installed) also deletes the options from the wp_options table in the database.
 
 Please see Libin's blog online:
-
 http://blog.libinpan.com/2008/03/21/introducing-the-google-ajax-translation-wordpress-plugin/
-
 http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/
 
 == Screenshots ==
@@ -58,10 +56,20 @@ http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/
 
 == Support ==
 
-Have questions or suggestions for this? Please ask in the forums here.
+Have questions or suggestions for this plugin? 
 
+Please ask in the forums here.
+1. Please start a new thread for your question, problem, or suggestion.
+2. Please include as much information as possible like: 
+   WordPress version, Google AJAX Translation version, a link to your web page
+3. Most problems seem to be theme related so check to see if the plugin works in the default theme (Kubrick).
 
 == Changelog ==
+
+0.4.5 (Nick Marshall)
+
+* Updated the jquery-translate plugin to version 1.3.9 which fixes an issue with alignment of right-to-left languages.
+* Fixed a bug where the [Translate] button and languages appear in `the_excerpt` if it's already 55 words or less. The function `get_the_excerpt` uses the filter `wp_trim_excerpt` which uses the filter `the_content`. (Thanks to Eiland for pointing out this problem.)
 
 0.4.4 (Nick Marshall)
 
