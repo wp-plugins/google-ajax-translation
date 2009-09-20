@@ -4,9 +4,9 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=l
 Tags: google, ajax, jquery, translate, translation, language
 Requires at least: 2.8
 Tested up to: 2.8
-Stable tag: 0.4.6
+Stable tag: 0.4.7
 
-Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts, pages, or comments into up to 43 languages.
+Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts, pages, or comments into 43 languages.
 
 == Description ==
 
@@ -16,7 +16,7 @@ A "Translate" button can be added to the bottom or top of posts, pages, and/or c
 
 Most formatting, font, color, etc. changes can be made in the file `google-ajax-translation.css` or you can override them with your own CSS file.
 
-The plugin detects the browser's preferred language and shows the "Translate" button in that language if available. That language is listed first in the popup. The tooltip for each language is also translated into the browser's preferred language. See <a href="http://www.w3.org/International/questions/qa-lang-priorities">this page</a> for more information about setting your browser's preferred language.
+The plugin detects the browser's preferred language and shows the "Translate" button in that language if available. That language is listed first in the popup. The tooltip for each language is also translated into the browser's preferred language. If the browser's preferred language isn't English a "Translate" button is shown on the Administration Panel that translates the panel. See <a href="http://www.w3.org/International/questions/qa-lang-priorities">this page</a> for more information about setting your browser's preferred language.
 
 Clicking the "powered by Google" link will take you to a full-page Google translation in your browser's preferred language.
 
@@ -39,13 +39,14 @@ Related Links:
 
 * Uses the <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Language API</a> and the <a href="http://code.google.com/p/jquery-translate/">jquery-translate plugin</a>.
 * Google Ajax Translation automatically detects your source language. If your source text changes to more than one language it can get confused.
+* To exclude certain pages from displaying the "Translate" button put the page ID numbers into the field marked "Exclude pages", for example 4, 5, 21. If you use permalinks you may not know your page ID's. The page ID is the number at the end of the URL when editing a page.
 * Most formatting, font, color, etc. changes can be made in `google-ajax-translation.css` or you can override them with your own CSS file
 * The included ajax throbber is black on a white background. You can make your own at <a href="http://www.ajaxload.info/">http://www.ajaxload.info/</a>. 16 by 16 pixels works best.
 * The "[" and "]" characters in the "Translate" button can be changed in the variables `$before_translate` and `$after_translate`
 * The `google-ajax-translation.js` file is included for reference. It is minified and appended to the file `jquery.translate-1.3.9.min.js`
-* To add WordPress MU compatibility the options page had to be changed to use the register_setting function. Because of this the plugin requires WordPress 2.7.
 * Deleting the plugin from the Administration Panel (Plugins > Installed) also deletes the options from the wp_options table in the database.
 * This plugin automatically uses the jQuery library supplied by your WordPress installation (version 1.3.2 as of August 2009). If your theme or another plugin has another copy of jQuery hard coded into it this plugin may not work.
+* Clicking the "powered by Google" link will take you to a full-page Google translation in your browser's preferred language. (This service will refuse to translate a page into the same language though, e.g. English to English.)
 
 == Screenshots ==
 
@@ -65,6 +66,14 @@ Please ask in the forums here.
 3. Most problems seem to be theme related so check to see if the plugin works in the default theme (Kubrick).
 
 == Changelog ==
+
+0.4.7 (Nick Marshall)
+
+* Added an option to exclude certain pages from displaying the "Translate" button.
+* If the browser's preferred language isn't English a "Translate" button is shown on the Administration Panel that translates the panel.
+* Many tweaks to the Administration Panel
+* The list of languages should be left aligned for all themes. Some theme's footers are center aligned which caused the problem.
+* Fixed the Czech flag image (Thanks, maoric)
 
 0.4.6 (Nick Marshall)
 
