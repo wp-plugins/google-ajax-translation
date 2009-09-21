@@ -4,8 +4,8 @@ Plugin Name: Google AJAX Translation
 Plugin URI: http://wordpress.org/extend/plugins/google-ajax-translation/
 Description: Add <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Translation</a> to your blog. This plugin allows your blog readers to translate your blog posts or comments into other languages. <a href="options-general.php?page=ajaxtranslation.php">[Settings]</a>
 Author: Libin Pan, Michael Klein, and Nick Marshall
-Version: 0.4.7
-Stable tag: 0.4.7
+Version: 0.4.8
+Stable tag: 0.4.8
 Author URI: http://libinpan.com/
 	
 TODO:
@@ -20,7 +20,7 @@ if (!class_exists('GoogleTranslation')) {
 	class GoogleTranslation {
 
 		var $optionPrefix = 'google_translation_';
-		var $version      = '0.4.7';
+		var $version      = '0.4.8';
 		var $pluginUrl    = 'http://wordpress.org/extend/plugins/google-ajax-translation/';
 		var $authorUrl    = 'http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/';
 
@@ -208,7 +208,7 @@ if (!class_exists('GoogleTranslation')) {
 		var $options = array(  // default values for options
 			'linkStyle' => 'text',
 			'linkPosition' => 'bottom',
-			'postEnable' => true,
+			'postEnable' => true, // is stored as "1" and "0" in database or false if the option doesn't exist
 			'pageEnable' => true,
 			'excludePages' => array(),
 			'commentEnable' => false,
@@ -240,14 +240,14 @@ if (!class_exists('GoogleTranslation')) {
 			/*foreach ( $this -> options as $k => $v ) {
 				delete_option( $this -> optionPrefix.$k );
 			}*/
-			if ( false !== get_option( $this -> optionPrefix . "languages" ) ) { // if options exist in the database
-				foreach ( $this -> options as $k => $v ) {              // get options from DB
+
+				foreach ( $this -> options as $k => $v ) { // get options from database
 					$current_option = get_option( $this -> optionPrefix . $k );
-					if ( NULL !== $current_option ) // Checks to skip NULL options
+					if ( false !== $current_option ) // Checks to skip false options (missing from database)
 						$this -> options[$k] = $current_option;
 				}
-			}
-			// echo var_dump($this -> options) . "<br />";
+
+			//	echo var_dump($this -> options) . "<br />\n";
 
 			$browser_lg = $this -> browser_lang = $this -> preferred_language( $this -> target_languages ); // find browser's preferred language
 			$browser_lg_index = array_search ( $browser_lg  , $this -> options['languages'] ); // find index of preferred language in options array
@@ -308,7 +308,7 @@ if (!class_exists('GoogleTranslation')) {
 		}
 
 		function sanitize_checkbox($value) { // sanitize checkbox option values
-			return ( 'on' == $value ) ? true : false;
+			return ( $value ) ? 1 : 0;
 		}
 
 		function sanitize_excludePages($value) { // sanitize excludePages string
@@ -504,8 +504,9 @@ if (!class_exists('GoogleTranslation')) {
 		}
 
 		function processContent($content = '') {
+			$backtrace = debug_backtrace();
 			if ( !is_feed() && // ignore feeds
-			( "wp_trim_excerpt" != $backtrace[3]["function"] ) && // ignore excerpts
+			( "the_excerpt" != $backtrace[7]["function"] ) && // ignore excerpts
 			( ( !is_page() && $this -> options['postEnable'] ) || ( is_page() && $this -> options['pageEnable'] ) ) && // apply to posts or pages
 			!is_page( $this -> options['excludePages'] ) ) { // exclude certain pages 
 				global $post;
