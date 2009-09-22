@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=l
 Tags: google, ajax, jquery, translate, translation, language
 Requires at least: 2.8
 Tested up to: 2.8
-Stable tag: 0.4.8
+Stable tag: 0.4.9
 
 Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts, pages, or comments into 43 languages.
 
@@ -66,6 +66,10 @@ Please ask in the forums here.
 3. Most problems seem to be theme related so check to see if the plugin works in the default theme (Kubrick).
 
 == Changelog ==
+
+0.4.9 (Nick Marshall)
+
+* Fixed bug where leaving the "Exclude pages" field blank would exclude all pages. Sorry again!
 
 0.4.8 (Nick Marshall)
 

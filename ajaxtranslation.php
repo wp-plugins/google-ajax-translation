@@ -4,8 +4,8 @@ Plugin Name: Google AJAX Translation
 Plugin URI: http://wordpress.org/extend/plugins/google-ajax-translation/
 Description: Add <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Translation</a> to your blog. This plugin allows your blog readers to translate your blog posts or comments into other languages. <a href="options-general.php?page=ajaxtranslation.php">[Settings]</a>
 Author: Libin Pan, Michael Klein, and Nick Marshall
-Version: 0.4.8
-Stable tag: 0.4.8
+Version: 0.4.9
+Stable tag: 0.4.9
 Author URI: http://libinpan.com/
 	
 TODO:
@@ -20,7 +20,7 @@ if (!class_exists('GoogleTranslation')) {
 	class GoogleTranslation {
 
 		var $optionPrefix = 'google_translation_';
-		var $version      = '0.4.8';
+		var $version      = '0.4.9';
 		var $pluginUrl    = 'http://wordpress.org/extend/plugins/google-ajax-translation/';
 		var $authorUrl    = 'http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/';
 
@@ -400,7 +400,7 @@ if (!class_exists('GoogleTranslation')) {
 		function outputOptionsPanel() {
 			$domain = $this -> textDomain;
 			$p = $this -> optionPrefix;
-			$excludePages_str = implode( ", ", $this -> options['excludePages'] );
+			$excludePages_str = implode( ", ", (array) $this -> options['excludePages'] );
 			echo '<div class="wrap">
 			<h2>' . __('Google Ajax Translation', $domain) . '</h2>
 			<p>' . __('Version', $domain) . ' ' . $this->version . ' | <a href="' . $this -> authorUrl . '" target="_blank" title="' . __('Visit author homepage', $domain) . '">Homepage</a> | <a href="' . $this -> pluginUrl . '" target="_blank" title="' . __('Visit plugin homepage', $domain) . '">Plugin Homepage</a> | <a target="_blank" title="Donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=libin_pan%40hotmail%2ecom&amp;item_name=Google%20Ajax%20Translation%20WP%20Plugin&amp;item_number=Support%20Open%20Source&amp;no_shipping=0&amp;no_note=1&amp;tax=0&amp;currency_code=USD&amp;lc=US&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8">' . __('Donate', $domain) . '</a></p>
@@ -508,7 +508,7 @@ if (!class_exists('GoogleTranslation')) {
 			if ( !is_feed() && // ignore feeds
 			( "the_excerpt" != $backtrace[7]["function"] ) && // ignore excerpts
 			( ( !is_page() && $this -> options['postEnable'] ) || ( is_page() && $this -> options['pageEnable'] ) ) && // apply to posts or pages
-			!is_page( $this -> options['excludePages'] ) ) { // exclude certain pages 
+			! ( ( array() !== $this -> options['excludePages'] ) && is_page( $this -> options['excludePages'] ) ) ) { // exclude certain pages 
 				global $post;
 				$id = $post -> ID;
 				$browser_lg = $this -> browser_lang;
