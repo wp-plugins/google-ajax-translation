@@ -1,21 +1,25 @@
 /**
  * Google AJAX Translation
- * 2008-08-30
+ * 2009-10-24
  */
 
 jQuery( function() {
 	jQuery('.translate_block').show(); // Show [Translate] buttons after the document is ready
+	var popup_id = document.getElementById( 'translate_popup' );
+	if ( popup_id ) {
+		document.body.appendChild( popup_id ); // Move popup to the end of the body if it isn't already
+	}
 });
 
 function google_translate( lang, type, id ) {
 	var text_node = document.getElementById( ( ( 'comment' == type ) ? 'div-' : '' ) + type + '-' + id ),
 		loading_id;
+	if ( ! text_node && 'post' == type ) // some themes do not have the post-id divs so we fall back on our own div
+		text_node = document.getElementById( 'content_div-' + id );
 	if ( ! text_node && 'comment' == type ) // some themes do not have the div-comment-id divs
 		text_node = document.getElementById( 'comment-' + id );
 	if ( text_node ) {
 		loading_id = '#translate_loading_' + type + '-' + id;
-		if ( 'he' == lang ) // Google translate uses the wrong code for Hebrew
-			lang = 'iw';
 		jQuery( text_node ).translate( lang, {
 			fromOriginal: true,
 			not: '.translate_block',
@@ -34,7 +38,7 @@ function localize_languages( browser_lang, popup_id ) {
 	for ( i in language_nodes ) {
 		llangs[i] = language_nodes[i].title; // Make array of English language names
 	}
-	jQuery.translate( llangs, 'en', ( ( 'he' == browser_lang ) ? 'iw' : browser_lang ), { // Google translate uses the wrong code for Hebrew
+	jQuery.translate( llangs, 'en', browser_lang, {
 		complete: function() {
 			llangs = this.translation;
 			for ( i in language_nodes ) { // copy localized language names into titles
@@ -47,26 +51,31 @@ function localize_languages( browser_lang, popup_id ) {
 
 function show_translate_popup( browser_lang, type, id ) {
 	var popup_id = document.getElementById( 'translate_popup' ),
+		jQ_popup_id = jQuery( popup_id ),
 		jQ_button_id = jQuery( '#translate_button_' + type + '-' + id ),
-		newleft = Math.round( jQ_button_id.offset().left ),
-		newtop = Math.round( jQ_button_id.offset().top + jQ_button_id.outerHeight(true) ),
-		popup_position = jQuery( popup_id ).position();
+		buttonleft = Math.round( jQ_button_id.offset().left ),
+		buttonbottom = Math.round( jQ_button_id.offset().top + jQ_button_id.outerHeight(true) );
 	if ( popup_id ) {
-		if ( 'none' == popup_id.style.display || popup_position.left != newleft || popup_position.top != newtop ) { // check for hidden popup or incorrect placement
+		if ( 'none' == popup_id.style.display || jQ_popup_id.position().top != buttonbottom ) { // check for hidden popup or incorrect placement
 			popup_id.style.display = 'none';
-			jQuery( popup_id ).css( 'left', newleft ).css( 'top', newtop ); // move popup to correct position
-			jQuery( popup_id ).slideDown( 'fast' );
+			jQ_popup_id.css( 'left', buttonleft ).css( 'top', buttonbottom ); // move popup to correct position
+			jQ_popup_id.slideDown( 'fast' );
+			// move popup to the left if right edge is outside of window
+			var rightedge_diff = jQuery(window).width() + jQuery(window).scrollLeft() - jQ_popup_id.offset().left - jQ_popup_id.outerWidth(true);
+			if ( rightedge_diff < 0 ) {
+				jQ_popup_id.css( 'left', Math.max( 0, jQ_popup_id.offset().left + rightedge_diff ) );
+			}
 			jQuery( '#translate_popup .languagelink' ).each( function() { // bind click event onto all the anchors
 				jQuery( this ).unbind( 'click' ).click( function () {
 					google_translate( this.lang, type, id );
 					return false;
 				});
 			});
-			if ( 'en' != browser_lang && ( ! jQuery( popup_id ).data( 'localized' ) ) ) { // If the browser's preferred language isn't English and the popup hasn't already been localized
+			if ( 'en' != browser_lang && ( ! jQ_popup_id.data( 'localized' ) ) ) { // If the browser's preferred language isn't English and the popup hasn't already been localized
 				localize_languages( browser_lang, popup_id );
 			}
 		} else {
-			jQuery( popup_id ).slideUp( 'fast' );
+			jQ_popup_id.slideUp( 'fast' );
 		}
 	}
 }

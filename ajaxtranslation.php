@@ -4,12 +4,13 @@ Plugin Name: Google AJAX Translation
 Plugin URI: http://wordpress.org/extend/plugins/google-ajax-translation/
 Description: Add <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Translation</a> to your blog. This plugin allows your blog readers to translate your blog posts or comments into other languages. <a href="options-general.php?page=ajaxtranslation.php">[Settings]</a>
 Author: Libin Pan, Michael Klein, and Nick Marshall
-Version: 0.4.9
-Stable tag: 0.4.9
+Version: 0.5.0
+Stable tag: 0.5.0
 Author URI: http://libinpan.com/
 	
 TODO:
-	- add widget?
+	add widget?
+	put options into array
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 
@@ -20,15 +21,18 @@ if (!class_exists('GoogleTranslation')) {
 	class GoogleTranslation {
 
 		var $optionPrefix = 'google_translation_';
-		var $version      = '0.4.9';
+		var $version      = '0.5.0';
 		var $pluginUrl    = 'http://wordpress.org/extend/plugins/google-ajax-translation/';
 		var $authorUrl    = 'http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/';
 
 		var $languages = array(
+			'af' => 'Afrikaans',
 			'ar' => 'Arabic',
+			'be' => 'Belarusian',
 			'bg' => 'Bulgarian',
 			'ca' => 'Catalan',
 			'cs' => 'Czech',
+			'cy' => 'Welsh',
 			'da' => 'Danish',
 			'de' => 'German',
 			'el' => 'Greek',
@@ -38,17 +42,21 @@ if (!class_exists('GoogleTranslation')) {
 			'fa' => 'Persian',
 			'fi' => 'Finnish',
 			'fr' => 'French',
+			'ga' => 'Irish',
 			'gl' => 'Galician',
 			'he' => 'Hebrew',
 			'hi' => 'Hindi',
 			'hr' => 'Croatian',
 			'hu' => 'Hungarian',
 			'id' => 'Indonesian',
+			'is' => 'Icelandic',
 			'it' => 'Italian',
 			'ja' => 'Japanese',
 			'ko' => 'Korean',
 			'lt' => 'Lithuanian',
 			'lv' => 'Latvian',
+			'mk' => 'Macedonian',
+			'ms' => 'Malay',
 			'mt' => 'Maltese',
 			'nl' => 'Dutch',
 			'no' => 'Norwegian',
@@ -61,19 +69,24 @@ if (!class_exists('GoogleTranslation')) {
 			'sq' => 'Albanian',
 			'sr' => 'Serbian',
 			'sv' => 'Swedish',
+			'sw' => 'Swahili',
 			'th' => 'Thai',
 			'tl' => 'Filipino',
 			'tr' => 'Turkish',
 			'uk' => 'Ukrainian',
 			'vi' => 'Vietnamese',
+			'yi' => 'Yiddish',
 			'zh-cn' => 'Chinese (Simplified)',
 			'zh-tw' => 'Chinese (Traditional)'
 		);
 		var $target_languages = array(
+			'af',     // Afrikaans
 			'ar',     // Arabic
+			'be',     // Belarusian
 			'bg',     // Bulgarian
 			'ca',     // Catalan
 			'cs',     // Czech
+			'cy',     // Welsh
 			'da',     // Danish
 			'de',     // German
 			'el',     // Greek
@@ -83,17 +96,21 @@ if (!class_exists('GoogleTranslation')) {
 			'fa',     // Persian
 			'fi',     // Finnish
 			'fr',     // French
+			'ga',     // Irish
 			'gl',     // Galician
 			'he',     // Hebrew
 			'hi',     // Hindi
 			'hr',     // Croatian
 			'hu',     // Hungarian
 			'id',     // Indonesian
+			'is',     // Icelandic
 			'it',     // Italian
 			'ja',     // Japanese
 			'ko',     // Korean
 			'lt',     // Lithuanian
 			'lv',     // Latvian
+			'mk',     // Macedonian
+			'ms',     // Malay
 			'mt',     // Maltese
 			'nl',     // Dutch
 			'no',     // Norwegian
@@ -106,19 +123,24 @@ if (!class_exists('GoogleTranslation')) {
 			'sq',     // Albanian
 			'sr',     // Serbian
 			'sv',     // Swedish
+			'sw',     // Swahili
 			'th',     // Thai
 			'tl',     // Filipino
 			'tr',     // Turkish
 			'uk',     // Ukrainian
 			'vi',     // Vietnamese
+			'yi',     // Yiddish
 			'zh-cn',  // Chinese (Simplified)
 			'zh-tw'   // Chinese (Traditional)
 		);
 		var $display_name = array(
+			'af' => 'Afrikaans',
 			'ar' => 'العربية',
+			'be' => 'Беларуская',
 			'bg' => 'български',
 			'ca' => 'català',
 			'cs' => 'česky',
+			'cy' => 'Cymraeg',
 			'da' => 'dansk',
 			'de' => 'Deutsch',
 			'el' => 'ελληνική',
@@ -128,17 +150,21 @@ if (!class_exists('GoogleTranslation')) {
 			'fa' => 'فارسی',
 			'fi' => 'suomi',
 			'fr' => 'français',
+			'ga' => 'Gaeilge',
 			'gl' => 'galego',
 			'he' => 'עברית',
 			'hi' => 'हिन्दी',
 			'hr' => 'hrvatski',
 			'hu' => 'magyar',
-			'id' => 'Indonesia',
+			'id' => 'bahasa Indonesia',
+			'is' => 'íslenska',
 			'it' => 'italiano',
 			'ja' => '日本語',
 			'ko' => '한국어',
 			'lt' => 'lietuvių',
 			'lv' => 'latviešu',
+			'mk' => 'македонски',
+			'ms' => 'bahasa Melayu',
 			'mt' => 'Malti',
 			'nl' => 'Nederlands',
 			'no' => 'norsk',
@@ -151,19 +177,24 @@ if (!class_exists('GoogleTranslation')) {
 			'sq' => 'shqipe',
 			'sr' => 'српски',
 			'sv' => 'svenska',
+			'sw' => 'Kiswahili',
 			'th' => 'ภาษาไทย',
 			'tl' => 'Filipino',
 			'tr' => 'Türkçe',
 			'uk' => 'українська',
 			'vi' => 'tiếng Việt',
+			'yi' => 'ייִדיש',
 			'zh-cn' => '中文 (简体)',
 			'zh-tw' => '中文 (繁體)'
 		);
 		var $translate_message = array(
+			'af' => 'Vertaal',
 			'ar' => 'ترجمة',
+			'be' => 'Перакладаць',
 			'bg' => 'Преводач',
 			'ca' => 'Traductor',
 			'cs' => 'Překladač',
+			'cy' => 'Cyfieithu',
 			'da' => 'Oversæt',
 			'de' => 'Übersetzung',
 			'el' => 'Μετάφραση',
@@ -173,17 +204,21 @@ if (!class_exists('GoogleTranslation')) {
 			'fa' => 'ترجمه',
 			'fi' => 'Kääntäjä',
 			'fr' => 'Traduction',
+			'ga' => 'Aistrigh',
 			'gl' => 'Traducir',
 			'he' => 'תרגם',
 			'hi' => 'अनुवाद करें',
 			'hr' => 'Prevoditelj',
 			'hu' => 'Fordítás',
-			'id' => 'Translate',
+			'id' => 'Menerjemahkan',
+			'is' => 'Þýða',
 			'it' => 'Traduttore',
 			'ja' => '翻訳',
 			'ko' => '번역',
 			'lt' => 'Versti',
 			'lv' => 'Tulkotājs',
+			'mk' => 'Преведува',
+			'ms' => 'Menerjemahkan',
 			'mt' => 'Traduċi',
 			'nl' => 'Vertaal',
 			'no' => 'Oversetter',
@@ -196,58 +231,56 @@ if (!class_exists('GoogleTranslation')) {
 			'sq' => 'Përkthej',
 			'sr' => 'преводилац',
 			'sv' => 'Översätt',
+			'sw' => 'Tafsiri',
 			'th' => 'แปล',
 			'tl' => 'Pagsasalin',
 			'tr' => 'Tercüme etmek',
 			'uk' => 'Перекладач',
 			'vi' => 'Dịch',
+			'yi' => 'זעץ',
 			'zh-cn' => '翻译',
 			'zh-tw' => '翻譯',
 		);
 
 		var $options = array(  // default values for options
-			'linkStyle' => 'text',
-			'linkPosition' => 'bottom',
-			'postEnable' => true, // is stored as "1" and "0" in database or false if the option doesn't exist
-			'pageEnable' => true,
-			'excludePages' => array(),
-			'commentEnable' => false,
-			'languages' => array()
+			'linkStyle' => 'text', // is stored as 'text', 'image', or 'imageandtext'
+			'linkPosition' => 'bottom', // is stored as 'top' or 'bottom'
+			'hlineEnable' => true, // is stored as "1" and "0" in database or returns false if the option doesn't exist
+			'copyBodyBackgroundColor' => false, // is stored as "1" and "0" in database or returns false if the option doesn't exist
+			'backgroundColor' => NULL, // is stored as NULL or CSS color in the format #5AF or #55AAFF
+			'postEnable' => true, // is stored as "1" and "0" in database or returns false if the option doesn't exist
+			'pageEnable' => true, // is stored as "1" and "0" in database or returns false if the option doesn't exist
+			'excludePages' => array(), // array of page id's to exclude
+			'commentEnable' => false, // is stored as "1" and "0" in database or returns false if the option doesn't exist
+			'languages' => array() // array of language codes to display in popup
 		);
 
-		var $textDomain = 'wpgt';
-		var $languageFileLoaded = false;
+		var $textDomain = 'wpgt'; // not used currently
+		var $languageFileLoaded = false; // not used currently
 		var $pluginRoot = '';
 		
 		var $before_translate = '['; // text to display before and after "Translate" link
 		var $after_translate = ']';
 		var $browser_lang = 'en';
-		
-		/*
-		function getPluginUrl() {
-			if ( ! defined( 'WP_CONTENT_URL' ) )
-				define( 'WP_CONTENT_URL', get_option( 'siteurl' ) . '/wp-content' );
-			if ( ! defined( 'WP_PLUGIN_URL' ) )
-				define( 'WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins' );
-			return trailingslashit( WP_PLUGIN_URL . '/' . plugin_basename( dirname( __FILE__ ) ) );
-		}
-		*/
-		
-		function GoogleTranslation() {                      // Constructor
-			//$this->pluginRoot = $this->getPluginUrl(); // old pluginRoot function
-			$this -> pluginRoot = plugins_url('google-ajax-translation/');
 
-			/*foreach ( $this -> options as $k => $v ) {
+		function GoogleTranslation() { // php 4 Constructor
+			$this -> pluginRoot = plugins_url( '/', __FILE__ );
+
+			foreach ( $this -> options as $k => $v ) { // delete old style options from database from before version 0.5.0
 				delete_option( $this -> optionPrefix.$k );
-			}*/
+			}
+			//delete_option( $this -> optionPrefix . 'options' );
 
-				foreach ( $this -> options as $k => $v ) { // get options from database
-					$current_option = get_option( $this -> optionPrefix . $k );
-					if ( false !== $current_option ) // Checks to skip false options (missing from database)
-						$this -> options[$k] = $current_option;
+			$current_options = get_option( $this -> optionPrefix . 'options' );
+			//echo var_dump($current_options) . "<br />\n";
+			
+			if ( $current_options ) {
+				foreach ( $current_options as $k => $v ) {
+					if ( false !== $current_options[$k] ) // Checks to skip false options (missing from database) (probably not necessary after version 0.5.0)
+						$this -> options[$k] = $current_options[$k];
 				}
-
-			//	echo var_dump($this -> options) . "<br />\n";
+			}
+			//echo var_dump($this -> options) . "<br />\n";
 
 			$browser_lg = $this -> browser_lang = $this -> preferred_language( $this -> target_languages ); // find browser's preferred language
 			$browser_lg_index = array_search ( $browser_lg  , $this -> options['languages'] ); // find index of preferred language in options array
@@ -257,19 +290,15 @@ if (!class_exists('GoogleTranslation')) {
 			}
 
 			// Add action and filter hooks to WordPress
-			wp_register_style( 'google-ajax-translation-css', $this->pluginRoot . 'google-ajax-translation.css', false, '20090828', 'screen' );
-			wp_register_script( 'jquery-translate-js', $this->pluginRoot . 'jquery.translate-1.3.9.min.js', array('jquery'), '1.3.9', true );
-			//wp_enqueue_script( 'google-ajax-translation-js', $this->pluginRoot . 'google-ajax-translation.js', array('jquery-translate'), '20090830', true ); // Minified version is appended to jquery.translate-1.3.9.min.js (Leave this here for debugging.)
+			wp_register_style( 'google-ajax-translation', $this->pluginRoot . 'google-ajax-translation.css', false, '20091023', 'screen' );
+			wp_register_script( 'jquery-translate', $this->pluginRoot . 'jquery.translate-1.4.1.min.js', array('jquery'), '1.4.1', true );
 			if ( is_admin() ) {
 				add_action( 'admin_menu', array( &$this, 'addOptionsPage' ) );
 				add_action( 'admin_init', array( &$this, 'register_translation_settings' ) );
-				if ( 'ajaxtranslation.php' == $_GET['page'] ) {
-					wp_enqueue_style( 'google-ajax-translation-css' );
-					wp_enqueue_script( 'jquery-translate-js' );
-				}
 			} else {
-				wp_enqueue_style( 'google-ajax-translation-css' );
-				wp_enqueue_script( 'jquery-translate-js' );
+				wp_enqueue_style( 'google-ajax-translation' );
+				wp_enqueue_script( 'jquery-translate' );
+				//wp_enqueue_script( 'google-ajax-translation-unminified', $this->pluginRoot . 'google-ajax-translation.js', array('jquery-translate'), '20091024', true ); // Minified version is appended to jquery.translate-1.4.1.min.js (Leave this here for debugging.)
 				if ( $this -> options['postEnable'] || $this -> options['pageEnable'] ) {
 					add_filter( 'the_content', array( &$this, 'processContent' ), 50 );
 				}
@@ -280,21 +309,31 @@ if (!class_exists('GoogleTranslation')) {
 			}
 		}
 
-		function addOptionsPage(){
+		function addOptionsPage(){ // adds Google Translation to Options menu in Administration Panel and adds scripts and css to one page
 			$plugin_page = add_options_page('Google Translation', 'Google Translation', 'manage_options', basename(__FILE__), array(&$this, 'outputOptionsPanel'));
-			if ( 'ajaxtranslation.php' == $_GET['page'] )
+			if ( 'ajaxtranslation.php' == $_GET['page'] ) { // add only to one admin page
 				add_action( 'admin_footer-'. $plugin_page, array( &$this, 'admin_js' ) );
+				wp_enqueue_style( 'google-ajax-translation' );
+				wp_enqueue_script( 'jquery-translate' );
+			}
 		}
 
 		function register_translation_settings() { // whitelist and sanitize options
-			$p = $this -> optionPrefix;
-			register_setting( 'google-ajax-translation', $p . 'linkStyle', array( &$this, 'sanitize_linkStyle' ) );
-			register_setting( 'google-ajax-translation', $p . 'linkPosition', array( &$this, 'sanitize_linkPosition' ) );
-			register_setting( 'google-ajax-translation', $p . 'postEnable', array( &$this, 'sanitize_checkbox' )  );
-			register_setting( 'google-ajax-translation', $p . 'pageEnable', array( &$this, 'sanitize_checkbox' )  );
-			register_setting( 'google-ajax-translation', $p . 'excludePages', array( &$this, 'sanitize_excludePages' ) );
-			register_setting( 'google-ajax-translation', $p . 'commentEnable', array( &$this, 'sanitize_checkbox' )  );
-			register_setting( 'google-ajax-translation', $p . 'languages', array( &$this, 'sanitize_languages' ) );
+			register_setting( 'google-ajax-translation', $this -> optionPrefix . 'options', array( &$this, 'sanitize_options' ) );
+		}
+
+		function sanitize_options($value) { // sanitize options array
+			$value['linkStyle'] = $this -> sanitize_linkStyle( $value['linkStyle'] );
+			$value['linkPosition'] = $this -> sanitize_linkPosition( $value['linkPosition'] );
+			$value['hlineEnable'] = $this -> sanitize_checkbox( $value['hlineEnable'] );
+			$value['copyBodyBackgroundColor'] = $this -> sanitize_checkbox( $value['copyBodyBackgroundColor'] );
+			$value['backgroundColor'] = $this -> sanitize_backgroundColor( $value['backgroundColor'] );
+			$value['postEnable'] = $this -> sanitize_checkbox( $value['postEnable'] );
+			$value['pageEnable'] = $this -> sanitize_checkbox( $value['pageEnable'] );
+			$value['excludePages'] = $this -> sanitize_excludePages( $value['excludePages'] );
+			$value['commentEnable'] = $this -> sanitize_checkbox( $value['commentEnable'] );
+			$value['languages'] = $this -> sanitize_languages( $value['languages'] );
+			return $value;
 		}
 
 		function sanitize_linkStyle($value) { // sanitize linkStyle option value
@@ -309,6 +348,14 @@ if (!class_exists('GoogleTranslation')) {
 
 		function sanitize_checkbox($value) { // sanitize checkbox option values
 			return ( $value ) ? 1 : 0;
+		}
+
+		function sanitize_backgroundColor($value) { // sanitize backgroundColor string
+			$value = strtoupper( $value );
+			if ( preg_match( "/^#[\dA-F]{3}$|^#[\dA-F]{6}$/", $value ) )
+				return $value;
+			else
+				return null;
 		}
 
 		function sanitize_excludePages($value) { // sanitize excludePages string
@@ -343,10 +390,10 @@ if (!class_exists('GoogleTranslation')) {
 		}
 
 		function uninstall() { // uninstall function called by uninstall.php
-			foreach ( $this -> options as $k => $v ) { // delete options from wp_options table
-					delete_option( $this -> optionPrefix . $k );
-				}
-			// echo "<p>Deleting options</p>";
+			/*foreach ( $this -> options as $k => $v ) { // delete options from wp_options table
+				delete_option( $this -> optionPrefix . $k );
+			}*/
+			delete_option( $this -> optionPrefix . 'options' ); // delete options from wp_options table
 		}
 
 		function loadLanguageFile() { // loads language files according to locale (NOT WORKING YET)
@@ -358,15 +405,13 @@ if (!class_exists('GoogleTranslation')) {
 
 		function admin_js() { // attach click events to admin buttons
 			$browser_lg = $this -> browser_lang;
-			if ( "he" == $browser_lg )
-				$browser_lg = "iw"; // Google translate uses the wrong code for Hebrew
 			?>
 			<script type="text/javascript">
 			//<![CDATA[
 				jQuery(document).ready(function($) {
 <?php
-					if ( 'en' != $this -> browser_lang ) {
-					?>
+				if ( 'en' != $this -> browser_lang ) :
+?>
 					$('#translate_button').click(function() { // translate panel into browser's preferred language
 						$('.wrap').translate( 'en', '<?php echo $browser_lg ?>', {
 							not: 'img, #translate_button',
@@ -376,13 +421,20 @@ if (!class_exists('GoogleTranslation')) {
 						});
 					});
 <?php
-					}
-					?>
-					$('input[name="google_translation_pageEnable"]').click(function() { // disable and enable excludePages text field
+				endif;
+?>
+					$('input[name="google_translation_options[pageEnable]"]').click(function() { // disable and enable excludePages text field
 						if ( $(this).is(':checked') ) {
-							$('input[name="google_translation_excludePages"]').removeAttr('disabled');
+							$('input[name="google_translation_options[excludePages]"]').removeAttr('disabled');
 						} else {
-							$('input[name="google_translation_excludePages"]').attr('disabled', 'disabled');
+							$('input[name="google_translation_options[excludePages]"]').attr('disabled', 'disabled');
+						}
+					});
+					$('input[name="google_translation_options[copyBodyBackgroundColor]"]').click(function() { // disable and enable backgroundColor text field
+						if ( $(this).is(':checked') ) {
+							$('input[name="google_translation_options[backgroundColor]"]').attr('disabled', 'disabled');
+						} else {
+							$('input[name="google_translation_options[backgroundColor]"]').removeAttr('disabled');
 						}
 					});
 					$('#languages_all').click(function() { // check all languages
@@ -412,9 +464,9 @@ if (!class_exists('GoogleTranslation')) {
 				<td>
 					<fieldset>
 						<legend class="screen-reader-text"><span>' . __('Link style', $domain) . '</span></legend>
-						<label><input name="' . $p . 'linkStyle" type="radio" value="text" ' . ( ( 'text' == $this -> options['linkStyle'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Language Text', $domain) . '</span></label><br />
-						<label><input name="' . $p . 'linkStyle" type="radio" value="image" ' . ( ( 'image' == $this -> options['linkStyle'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Flag Icon', $domain) . '</span></label><br />
-						<label><input name="' . $p . 'linkStyle" type="radio" value="imageandtext" ' . ( ( 'imageandtext' == $this -> options['linkStyle'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Flag Icon and Text', $domain) . '</span></label>
+						<label><input name="' . $p . 'options[linkStyle]" type="radio" value="text" ' . ( ( 'text' == $this -> options['linkStyle'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Language Text', $domain) . '</span></label><br />
+						<label><input name="' . $p . 'options[linkStyle]" type="radio" value="image" ' . ( ( 'image' == $this -> options['linkStyle'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Flag Icon', $domain) . '</span></label><br />
+						<label><input name="' . $p . 'options[linkStyle]" type="radio" value="imageandtext" ' . ( ( 'imageandtext' == $this -> options['linkStyle'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Flag Icon and Text', $domain) . '</span></label>
 					</fieldset>
 				</td>
 			</tr>
@@ -423,8 +475,31 @@ if (!class_exists('GoogleTranslation')) {
 				<td>
 					<fieldset>
 						<legend class="screen-reader-text"><span>' . __('Translate button position', $domain) . '</span></legend>
-						<label><input name="' . $p . 'linkPosition" type="radio" value="top" ' . ( ( 'top' == $this -> options['linkPosition'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Top', $domain) . '</span></label><br />
-						<label><input name="' . $p . 'linkPosition" type="radio" value="bottom" ' . ( ( 'bottom' == $this -> options['linkPosition'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Bottom', $domain) . '</span></label><br />
+						<label><input name="' . $p . 'options[linkPosition]" type="radio" value="top" ' . ( ( 'top' == $this -> options['linkPosition'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Top of posts and pages', $domain) . '</span></label><br />
+						<label><input name="' . $p . 'options[linkPosition]" type="radio" value="bottom" ' . ( ( 'bottom' == $this -> options['linkPosition'] ) ? 'checked="checked" ' : '' ) . '/> <span>' . __('Bottom of posts and pages', $domain) . '</span></label><br />
+					</fieldset>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">' . __('Horizontal line', $domain) . '</th>
+				<td>
+					<label>
+						<input name="' . $p . 'options[hlineEnable]" type="checkbox" ' . ( ( $this -> options['hlineEnable'] ) ? 'checked="checked" ' : '' ) . '/>
+						<span>' . __('Show line above or below Translate button', $domain) . '</span>
+					</label>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">' . __('Background color', $domain) . '</th>
+				<td>
+					<fieldset>
+						<legend class="screen-reader-text"><span>' . __('Background color', $domain) . '</span></legend>
+						<label>
+							<input name="' . $p . 'options[copyBodyBackgroundColor]" type="checkbox" ' . ( ( $this -> options['copyBodyBackgroundColor'] ) ? 'checked="checked" ' : '' ) . '/>
+							<span>' . __('Copy background color from page body', $domain) . '</span>
+						</label><br />
+						<input name="' . $p . 'options[backgroundColor]" type="text" value="' . $this -> options['backgroundColor'] . '" ' . ( ! ( $this -> options['copyBodyBackgroundColor'] ) ? '' : 'disabled="disabled"' ) . ' />
+						<span class="description">' . __('Background color in the format #5AF or #55AAFF', $domain) . '</span>
 					</fieldset>
 				</td>
 			</tr>
@@ -432,7 +507,7 @@ if (!class_exists('GoogleTranslation')) {
 				<th scope="row">' . __('Posts', $domain) . '</th>
 				<td>
 					<label>
-						<input name="' . $p . 'postEnable" type="checkbox" ' . ( ( $this -> options['postEnable'] ) ? 'checked="checked"' : '' ) . ' />
+						<input name="' . $p . 'options[postEnable]" type="checkbox" ' . ( ( $this -> options['postEnable'] ) ? 'checked="checked" ' : '' ) . '/>
 						<span>' . __('Enable post translation', $domain) . '</span>
 					</label>
 				</td>
@@ -441,9 +516,9 @@ if (!class_exists('GoogleTranslation')) {
 				<th scope="row">' . __('Pages', $domain) . '</th>
 				<td>
 					<label>
-						<input name="' . $p . 'pageEnable" type="checkbox" ' . ( ( $this -> options['pageEnable'] ) ? 'checked="checked"' : '' ) . ' />
+						<input name="' . $p . 'options[pageEnable]" type="checkbox" ' . ( ( $this -> options['pageEnable'] ) ? 'checked="checked" ' : '' ) . '/>
 						<span>' . __('Enable page translation', $domain) . '</span>
-					<label>
+					</label>
 				</td>
 			</tr>
 			<tr valign="top">
@@ -451,7 +526,7 @@ if (!class_exists('GoogleTranslation')) {
 				<td>
 					<fieldset>
 						<legend class="screen-reader-text"><span>' . __('Exclude pages', $domain) . '</span></legend>
-						<input name="' . $p . 'excludePages" type="text" value="' . $excludePages_str . '" ' . ( ( $this -> options['pageEnable'] ) ? '' : 'disabled="disabled"' ) . ' />
+						<input name="' . $p . 'options[excludePages]" type="text" value="' . $excludePages_str . '" ' . ( ( $this -> options['pageEnable'] ) ? '' : 'disabled="disabled"' ) . ' />
 						<span class="description">' . __('A comma separated list of page ID’s', $domain) . '</span>
 					</fieldset>
 				</td>
@@ -460,7 +535,7 @@ if (!class_exists('GoogleTranslation')) {
 				<th scope="row">' . __('Comments', $domain) . '</th>
 				<td>
 					<label>
-						<input name="' . $p . 'commentEnable" type="checkbox" ' . ( ( $this -> options['commentEnable'] ) ? 'checked="checked"' : '' ) . ' />
+						<input name="' . $p . 'options[commentEnable]" type="checkbox" ' . ( ( $this -> options['commentEnable'] ) ? 'checked="checked" ' : '' ) . '/>
 						<span>' . __('Enable comment translation', $domain) . '</span>
 					</label>
 				</td>
@@ -470,17 +545,17 @@ if (!class_exists('GoogleTranslation')) {
 				<td>
 					<fieldset>
 						<legend class="screen-reader-text"><span>' . __('Languages', $domain) . '</span></legend>
-						<table class="translate_links"><tr><td style="padding: 0 10px 0 0;" valign="top">
+						<table class="translate_links"><tr><td valign="top">
 						';
 						$numberof_languages = count( $this -> languages );
+						$index = 0;
 						foreach ( $this -> languages as $lg => $v ) {
-							echo '<label title="' . $this -> display_name[$lg] . '"><input type="checkbox" name="' . $p . 'languages[]" value="' . $lg . '" ';
-							if ( in_array( $lg, (array) $this -> options['languages'] ) ) echo 'checked="checked"';
-							echo ' /> <img class="translate_flag ' . $lg . '" src="' . $this -> pluginRoot . 'transparent.gif" alt="' . $this -> display_name[$lg] . '" width="16" height="11" /> <span>' . $v . '</span></label><br />
+							echo '<label title="' . $this -> display_name[$lg] . '"><input type="checkbox" name="' . $p . 'options[languages][]" value="' . $lg . '" ';
+							if ( in_array( $lg, (array) $this -> options['languages'] ) ) echo 'checked="checked" ';
+							echo '/> <img class="translate_flag ' . $lg . '" src="' . $this -> pluginRoot . 'transparent.gif" alt="' . $this -> display_name[$lg] . '" width="16" height="11" /> <span>' . $v . '</span></label><br />
 							';
-							if ( ( 0 == ++$i % 15) && ( $i < $numberof_languages ) ) {
-								echo '</td>
-								<td valign="top">';
+							if ( ( 0 == ++$index % 13) && ( $index < $numberof_languages ) ) { // columns should be 13 tall
+								echo '</td><td valign="top">' . "\n";
 							}
 						}
 				echo '</td></tr>
@@ -512,21 +587,23 @@ if (!class_exists('GoogleTranslation')) {
 				global $post;
 				$id = $post -> ID;
 				$browser_lg = $this -> browser_lang;
-				$translate_block = '<a class="translate_translate" id="translate_button_post-' . $id . '" lang="' . $browser_lg . '" xml:lang="' . $browser_lg . '" href="javascript:show_translate_popup(\'' . $browser_lg . '\', \'post\', ' . $id . ');">' . ($this -> before_translate) . ($this -> translate_message[$browser_lg]) . ($this -> after_translate) . '<img src="' . $this -> pluginRoot . 'transparent.gif" id="translate_loading_post-' . $id . '" class="translate_loading" style="display: none;" width="16" height="16" alt="" /></a>';
-				switch ( $this->options['linkPosition'] ) {
+				$content = '<div id="content_div-' . $id . '">' . "\n" . $content . "</div>\n";
+				$translate_hr = ( $this -> options['hlineEnable'] ) ? ( '<hr class="translate_hr" />' . "\n" ) : "";
+				$translate_block = '<a class="translate_translate" id="translate_button_post-' . $id . '" lang="' . $browser_lg . '" xml:lang="' . $browser_lg . '" href="javascript:show_translate_popup(\'' . $browser_lg . '\', \'post\', ' . $id . ');">' . ($this -> before_translate) . ($this -> translate_message[$browser_lg]) . ($this -> after_translate) . '</a><img src="' . $this -> pluginRoot . 'transparent.gif" id="translate_loading_post-' . $id . '" class="translate_loading" style="display: none;" width="16" height="16" alt="" />' . "\n";
+				switch ( $this -> options['linkPosition'] ) {
 					case 'top':
-						$content = '<div class="translate_block" style="display: none;">
-							' . $translate_block . '
-							<hr class="translate_hr" />
-						</div>
-						' . $content;
+						$content = '<div class="translate_block" style="display: none;">' . "\n" .
+							$translate_block . 
+							$translate_hr . 
+							"</div>\n" .
+							$content;
 					break;
 					case 'bottom':
-						$content = $content . '
-						<div class="translate_block" style="display: none;">
-							<hr class="translate_hr" />
-							' . $translate_block . '
-						</div>';
+						$content = $content . 
+							'<div class="translate_block" style="display: none;">' . "\n" .
+							$translate_hr . 
+							$translate_block . 
+							"</div>\n";
 					break;
 				}
 			}
@@ -538,10 +615,11 @@ if (!class_exists('GoogleTranslation')) {
 				global $comment;
 				$id = $comment -> comment_ID;
 				$browser_lg = $this -> browser_lang;
-				$translate_block = '<div class="translate_block" style="display: none;">
-					<hr class="google_translate_hr" />
-					<a class="translate_translate" id="translate_button_comment-' . $id . '" lang="' . $browser_lg . '" xml:lang="' . $browser_lg . '" href="javascript:show_translate_popup(\'' . $browser_lg . '\', \'comment\', ' . $id . ');">' . ($this -> before_translate) . ($this -> translate_message[$browser_lg]) . ($this -> after_translate) . '<img src="' . $this -> pluginRoot . 'transparent.gif" id="translate_loading_comment-' . $id . '" class="translate_loading" style="display: none;" width="16" height="16" alt="" /></a>
-				</div>';
+				$translate_hr = ( $this -> options['hlineEnable'] ) ? ( '<hr class="translate_hr" />' . "\n" ) : "";
+				$translate_block = '<div class="translate_block" style="display: none;">' . "\n" .
+					$translate_hr . 
+					'<a class="translate_translate" id="translate_button_comment-' . $id . '" lang="' . $browser_lg . '" xml:lang="' . $browser_lg . '" href="javascript:show_translate_popup(\'' . $browser_lg . '\', \'comment\', ' . $id . ');">' . ($this -> before_translate) . ($this -> translate_message[$browser_lg]) . ($this -> after_translate) . '</a><img src="' . $this -> pluginRoot . 'transparent.gif" id="translate_loading_comment-' . $id . '" class="translate_loading" style="display: none;" width="16" height="16" alt="" />' . 
+					"\n</div>\n";
 				$content .= $translate_block;
 			}
 			return $content;
@@ -550,49 +628,58 @@ if (!class_exists('GoogleTranslation')) {
 		function getLanguagePopup() {
 			$numberof_languages = count( $this -> options['languages'] );
 			$languages_per_column = ceil( ( $numberof_languages + 2 ) / 3 );
-			$s = '<div id="translate_popup" style="display: none;">
-			<table class="translate_links"><tr><td valign="top">
-			';
+			$index = 0;
+			$output = '<div id="translate_popup" style="display: none;' .
+				( $this -> options['backgroundColor'] ? ( ' background-color: ' . $this -> options['backgroundColor'] ) : "" ) .
+				'">' . "\n\t" .
+				'<table class="translate_links"><tr><td valign="top">' . "\n";
 			switch ( $this->options['linkStyle'] ) {
 				case 'text':
 					foreach($this -> options['languages'] as $lg) {
-						$s .= '<a class="languagelink" lang="' . $lg . '" xml:lang="' . $lg . '" href="#" title="' . $this -> languages[$lg] . '">' . $this -> display_name[$lg] . '</a>
-							';
-						if ( 0 == ++$i % $languages_per_column) {
-							$s .= '</td>
-							<td valign="top">
-							';
+						$output .= "\t\t" . '<a class="languagelink" lang="' . $lg . '" xml:lang="' . $lg . '" href="#" title="' .
+							$this -> languages[$lg] . '">' . $this -> display_name[$lg] . '</a>' . "\n";
+						if ( 0 == ++$index % $languages_per_column) {
+							$output .= "\t" . '</td><td valign="top">' . "\n";
 						}
 					}
 					break;
 				case 'image':
 					foreach($this -> options['languages'] as $lg) {
-						$s .= '<a class="languagelink" lang="' . $lg . '" xml:lang="' . $lg . '" href="#" title="' . $this -> languages[$lg] . '"><img class="translate_flag ' . $lg . '" src="' . $this -> pluginRoot . 'transparent.gif" alt="' . $this -> display_name[$lg] . '" width="16" height="11" /></a>
-							';
-						if ( 0 == ++$i % $languages_per_column) {
-							$s .= '</td>
-							<td valign="top">
-							';
+						$output .= "\t\t" . '<a class="languagelink" lang="' . $lg . '" xml:lang="' . $lg . '" href="#" title="' . 
+							$this -> languages[$lg] . '"><img class="translate_flag ' . $lg . '" src="' . 
+							$this -> pluginRoot . 'transparent.gif" alt="' . 
+							$this -> display_name[$lg] . '" width="16" height="11" /></a>' . "\n";
+						if ( 0 == ++$index % $languages_per_column) {
+							$output .= "\t" . '</td><td valign="top">' . "\n";
 						}
 					}
 					break;
 				case 'imageandtext':
 					foreach($this -> options['languages'] as $lg) {
-						$s .= '<a class="languagelink" lang="' . $lg . '" xml:lang="' . $lg . '" href="#" title="' . $this -> languages[$lg] . '"><img class="translate_flag ' . $lg . '" src="' . $this -> pluginRoot . 'transparent.gif" alt="' . $this -> display_name[$lg] . '" width="16" height="11" /> ' . $this -> display_name[$lg] . '</a>
-							';
-						if ( 0 == ++$i % $languages_per_column) {
-							$s .= '</td>
-							<td valign="top">
-							';
+						$output .= "\t\t" . '<a class="languagelink" lang="' . $lg . '" xml:lang="' . $lg . '" href="#" title="' . 
+							$this -> languages[$lg] . '"><img class="translate_flag ' . $lg . '" src="' . 
+							$this -> pluginRoot . 'transparent.gif" alt="' . 
+							$this -> display_name[$lg] . '" width="16" height="11" /> ' . 
+							$this -> display_name[$lg] . '</a>' . "\n";
+						if ( 0 == ++$index % $languages_per_column) {
+							$output .= "\t" . '</td><td valign="top">' . "\n";
 						}
 					}
 					break;
 			}
-			$s .= '<a class="google_branding" href="http://translate.google.com/translate?sl=auto&amp;tl=' . $this -> browser_lang . '&amp;u=' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . '" title="translate page">' . __('powered by', $this -> textDomain ) . '<img src="http://www.google.com/uds/css/small-logo.png" alt="Google" title="" width="51" height="15" /></a>
-				</td></tr></table>
-				</div>
-				';
-			echo $s;
+			$output .= "\t\t" . '<a class="google_branding" href="http://translate.google.com/translate?sl=auto&amp;tl=' .
+				$this -> browser_lang . '&amp;u=' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . '" title="translate page">' .
+				__('powered by', $this -> textDomain ) .
+				'<img src="http://www.google.com/uds/css/small-logo.png" alt="Google" title="" width="51" height="15" /></a>' . 
+				"\n\t</td></tr></table>\n</div>\n";
+			echo $output;
+			if ($this -> options['copyBodyBackgroundColor']) { // Copy css background-color to popup if option is set
+				echo '<script type="text/javascript">' . "\n" .
+					"jQuery( function($) {\n" .
+					"\t$('#translate_popup').css('background-color', $('body').css('background-color'));\n" .
+					"});\n" .
+					"</script>\n";
+			}
 		}
 
 		/**
@@ -650,7 +737,7 @@ if (!class_exists('GoogleTranslation')) {
 	}
 }
 
-if (class_exists('GoogleTranslation')) {                // instantiate the class
+if ( class_exists( 'GoogleTranslation' ) ) { // instantiate the class
 	$GoogleTranslation = new GoogleTranslation();
 }
 ?>
