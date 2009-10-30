@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=l
 Tags: google, ajax, jquery, translate, translation, language
 Requires at least: 2.8
 Tested up to: 2.8
-Stable tag: 0.5.0
+Stable tag: 0.5.1
 
 Add Google AJAX Translation to your blog. This plugin allows your readers to translate your blog posts, pages, or comments into 52 languages.
 
@@ -41,6 +41,7 @@ Related Links:
 * Google Ajax Translation automatically detects your source language. If your source text changes to more than one language it can get confused.
 * If your theme doesn't have a unique id for each post the plugin will fall back to translating just the content of the post but not the title, date, author, tags, etc. Try the plugin with the default theme (Kubrick) to see how it should work. If you need help modifying your theme just ask in the forums.
 * To exclude certain pages from displaying the "Translate" button put the page ID numbers into the field marked "Exclude pages", for example 4, 5, 21. If you use permalinks you may not know your page ID's. The page ID is the number at the end of the URL when editing a page.
+* The CSS background-color of the popup can be specified in the format #5AF or #55AAFF or it can be copied from the `body` of the page.
 * Most formatting, font, color, etc. changes can be made in `google-ajax-translation.css` or you can override them with your own CSS file
 * The included ajax throbber is black on a white background. You can make your own at <a href="http://www.ajaxload.info/">http://www.ajaxload.info/</a>. 16 by 16 pixels works best.
 * The "[" and "]" characters in the "Translate" button can be changed in the variables `$before_translate` and `$after_translate`
@@ -61,12 +62,16 @@ Have questions or suggestions for this plugin?
 
 Please ask in the forums here.
 
-1. Please <a href=http://wordpress.org/tags/google-ajax-translation?forum_id=10#postform">start a new thread</a> for your question, problem, or suggestion. Use the tag `google-ajax-translation` so that it shows up in the same list.
+1. Please start a new thread for your question, problem, or suggestion. Use the tag `google-ajax-translation` so that it shows up in the same list.
 2. Please include as much information as possible like:
    WordPress version, Google AJAX Translation version, a link to your web page
 3. Most problems seem to be theme related so check to see if the plugin works in the default theme (Kubrick).
 
 == Changelog ==
+
+0.5.1 (Nick Marshall)
+
+* Portuguese translation works now. The Google AJAX Language API only accepts the language code "pt-PT", Portuguese from Portugal, rather than just "pt". (Thanks to kurteye for the bug report.)
 
 0.5.0 (Nick Marshall)
 

@@ -4,13 +4,12 @@ Plugin Name: Google AJAX Translation
 Plugin URI: http://wordpress.org/extend/plugins/google-ajax-translation/
 Description: Add <a href="http://code.google.com/apis/ajaxlanguage/">Google AJAX Translation</a> to your blog. This plugin allows your blog readers to translate your blog posts or comments into other languages. <a href="options-general.php?page=ajaxtranslation.php">[Settings]</a>
 Author: Libin Pan, Michael Klein, and Nick Marshall
-Version: 0.5.0
-Stable tag: 0.5.0
+Version: 0.5.1
+Stable tag: 0.5.1
 Author URI: http://libinpan.com/
 	
 TODO:
 	add widget?
-	put options into array
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
 
@@ -21,7 +20,7 @@ if (!class_exists('GoogleTranslation')) {
 	class GoogleTranslation {
 
 		var $optionPrefix = 'google_translation_';
-		var $version      = '0.5.0';
+		var $version      = '0.5.1';
 		var $pluginUrl    = 'http://wordpress.org/extend/plugins/google-ajax-translation/';
 		var $authorUrl    = 'http://blog.libinpan.com/2008/08/04/google-ajax-translation-wordpress-plugin/';
 
@@ -298,7 +297,7 @@ if (!class_exists('GoogleTranslation')) {
 			} else {
 				wp_enqueue_style( 'google-ajax-translation' );
 				wp_enqueue_script( 'jquery-translate' );
-				//wp_enqueue_script( 'google-ajax-translation-unminified', $this->pluginRoot . 'google-ajax-translation.js', array('jquery-translate'), '20091024', true ); // Minified version is appended to jquery.translate-1.4.1.min.js (Leave this here for debugging.)
+				//wp_enqueue_script( 'google-ajax-translation-unminified', $this->pluginRoot . 'google-ajax-translation.js', array('jquery-translate'), '20091029', true ); // Minified version is appended to jquery.translate-1.4.1.min.js (Leave this here for debugging.)
 				if ( $this -> options['postEnable'] || $this -> options['pageEnable'] ) {
 					add_filter( 'the_content', array( &$this, 'processContent' ), 50 );
 				}

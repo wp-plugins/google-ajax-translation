@@ -1,6 +1,6 @@
 /**
  * Google AJAX Translation
- * 2009-10-24
+ * 2009-10-29
  */
 
 jQuery( function() {
@@ -54,14 +54,16 @@ function show_translate_popup( browser_lang, type, id ) {
 		jQ_popup_id = jQuery( popup_id ),
 		jQ_button_id = jQuery( '#translate_button_' + type + '-' + id ),
 		buttonleft = Math.round( jQ_button_id.offset().left ),
-		buttonbottom = Math.round( jQ_button_id.offset().top + jQ_button_id.outerHeight(true) );
+		buttonbottom = Math.round( jQ_button_id.offset().top + jQ_button_id.outerHeight(true) ),
+		rightedge_diff;
 	if ( popup_id ) {
+		jQuery.translate.languageCodeMap['pt'] = 'pt-PT'; // automatically convert 'pt' to 'pt-PT' in the jquery translate plugin
 		if ( 'none' == popup_id.style.display || jQ_popup_id.position().top != buttonbottom ) { // check for hidden popup or incorrect placement
 			popup_id.style.display = 'none';
 			jQ_popup_id.css( 'left', buttonleft ).css( 'top', buttonbottom ); // move popup to correct position
 			jQ_popup_id.slideDown( 'fast' );
 			// move popup to the left if right edge is outside of window
-			var rightedge_diff = jQuery(window).width() + jQuery(window).scrollLeft() - jQ_popup_id.offset().left - jQ_popup_id.outerWidth(true);
+			rightedge_diff = jQuery(window).width() + jQuery(window).scrollLeft() - jQ_popup_id.offset().left - jQ_popup_id.outerWidth(true);
 			if ( rightedge_diff < 0 ) {
 				jQ_popup_id.css( 'left', Math.max( 0, jQ_popup_id.offset().left + rightedge_diff ) );
 			}
