@@ -1,6 +1,6 @@
 /**
  * Google AJAX Translation
- * 2009-10-29
+ * 2010-04-15
  */
 
 jQuery( function() {
@@ -13,16 +13,22 @@ jQuery( function() {
 
 function google_translate( lang, type, id ) {
 	var text_node = document.getElementById( ( ( 'comment' == type ) ? 'div-' : '' ) + type + '-' + id ),
+		do_not_translate = '.translate_block',
 		loading_id;
 	if ( ! text_node && 'post' == type ) // some themes do not have the post-id divs so we fall back on our own div
 		text_node = document.getElementById( 'content_div-' + id );
 	if ( ! text_node && 'comment' == type ) // some themes do not have the div-comment-id divs
 		text_node = document.getElementById( 'comment-' + id );
 	if ( text_node ) {
+		if ( 'undefined' !== typeof ga_translation_options ) {
+			if ( 'undefined' !== typeof ga_translation_options['do_not_translate_selector'] ) {
+				do_not_translate += ', ' + ga_translation_options['do_not_translate_selector'];
+			}
+		}
 		loading_id = '#translate_loading_' + type + '-' + id;
 		jQuery( text_node ).translate( lang, {
 			fromOriginal: true,
-			not: '.translate_block',
+			not: do_not_translate,
 			start: function() { jQuery( loading_id ).show(); },
 			complete: function() { jQuery( loading_id ).hide(); },
 			error: function() { jQuery( loading_id ).hide(); }
